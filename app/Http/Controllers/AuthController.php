@@ -33,7 +33,7 @@ class AuthController extends Controller
             'email_verified_at' => now(),
         ]);
 
-        return response(['message' => 'Email validated successfully']);
+        return redirect('/login');
     }
 
     public function login(LoginRequest $request)
