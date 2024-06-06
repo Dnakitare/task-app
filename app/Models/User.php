@@ -12,6 +12,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     const IS_VALID_EMAIL = true;
+
     const IS_INVALID_EMAIL = false;
 
     /**
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'remember_token',
+        'email_verified_at',
     ];
 
     /**
