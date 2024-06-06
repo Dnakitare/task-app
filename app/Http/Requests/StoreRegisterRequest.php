@@ -21,7 +21,7 @@ class StoreRegisterRequest extends BaseRequest
     {
         return [
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
+            'password' => 'required|string|min:6',
         ];
     }
 }
