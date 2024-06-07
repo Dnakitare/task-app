@@ -10,6 +10,19 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+    public function index()
+    {
+        // using the name query parameter to filter the projects, paginate the results, and return the projects in descending order of their creation date
+        $projects = Project::query()
+            ->when(request('name'), function ($query, $name) {
+                return $query->where('name', 'like', "%$name%");
+            })
+            ->latest()
+            ->paginate(10);
+
+        return $projects;
+    }
+
     public function show(Project $project)
     {
         return $project->load('task_progress');
