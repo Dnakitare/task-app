@@ -15,6 +15,14 @@ class Project extends Model
     const STATUS_INACTIVE = 'inactive';
     const STATUS_COMPLETED = 'completed';
 
+    protected $fillable = [
+        'name',
+        'slug',
+        'start_date',
+        'end_date',
+        'status',
+    ];
+
     protected $guarded = [];
 
     public static function createSlug($name) {
