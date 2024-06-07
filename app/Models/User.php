@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     const IS_VALID_EMAIL = true;
 

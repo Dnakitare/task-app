@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Project;
-use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProjectRequest extends BaseRequest
 {
@@ -26,7 +25,7 @@ class StoreProjectRequest extends BaseRequest
             'name' => 'required|string',
             'start_date' => 'required',
             'end_date' => 'required',
-            'status' => 'required|string|in:' . implode(',', [
+            'status' => 'required|string|in:'.implode(',', [
                 Project::STATUS_NOT_STARTED,
                 Project::STATUS_ACTIVE,
                 Project::STATUS_INACTIVE,

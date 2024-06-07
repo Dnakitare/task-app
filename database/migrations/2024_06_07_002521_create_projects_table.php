@@ -18,10 +18,10 @@ return new class extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->string('status')->enum([
-                Project::STATUS_NOT_STARTED, 
-                Project::STATUS_ACTIVE, 
-                Project::STATUS_INACTIVE, 
-                Project::STATUS_COMPLETED
+                Project::STATUS_NOT_STARTED,
+                Project::STATUS_ACTIVE,
+                Project::STATUS_INACTIVE,
+                Project::STATUS_COMPLETED,
             ]);
             $table->string('slug');
             $table->timestamps();

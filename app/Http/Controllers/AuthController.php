@@ -28,7 +28,7 @@ class AuthController extends Controller
     public function verifyEmail(Request $request)
     {
         $user = User::where('remember_token', $request->token)->first();
-        
+
         if ($user->is_validated === User::IS_VALID_EMAIL) {
             return redirect('/login');
         }
@@ -45,13 +45,14 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (!is_null($user)) {
+        if (! is_null($user)) {
             if ($user->is_validated === User::IS_INVALID_EMAIL) {
                 NewUserCreated::dispatch($user);
+
                 return response(['message' => 'Please verify your email address. A verification link has been sent to your email address.']);
             }
 
-            if (!auth()->attempt($request->only('email', 'password'))) {
+            if (! auth()->attempt($request->only('email', 'password'))) {
                 return response(['message' => 'Invalid credentials'], 422);
             }
 

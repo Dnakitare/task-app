@@ -4,22 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\TaskProgress;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
-    public function get(Project $project)
+    public function show(Project $project)
     {
-        return $project;
+        return $project->load('task_progress');
     }
 
     public function store(Request $request)
     {
-        $project = Project::create([
-            ...$request->all(),
-            'slug' => Project::createSlug($request->name),
-        ]);
-        return response()->json($project, 201);
+        DB::beginTransaction(function () use ($request) {
+            $project = Project::create([
+                ...$request->all(),
+                'slug' => Project::createSlug($request->name),
+            ]);
+
+            $project->task_progress()->create([
+                'pinned_on_dashboard' => TaskProgress::NOT_PINNED_ON_DASHBOARD,
+                'progress' => TaskProgress::INITIAL_PROJECT_PROGRESS,
+            ]);
+
+            return response($project, 201);
+        });
     }
 
     public function update(UpdateProjectRequest $request, Project $project)
@@ -28,12 +38,14 @@ class ProjectController extends Controller
             ...$request->all(),
             'slug' => Project::createSlug($request->name),
         ]);
+
         return response()->json($project, 200);
     }
 
     public function destroy(Project $project)
     {
         $project->delete();
+
         return response(null, 204);
     }
 }
