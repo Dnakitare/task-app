@@ -6,10 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, HasApiTokens, Notifiable;
 
     const IS_VALID_EMAIL = true;
 
@@ -24,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'remember_token',
+        'is_validated',
         'email_verified_at',
     ];
 
