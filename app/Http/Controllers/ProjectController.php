@@ -61,4 +61,22 @@ class ProjectController extends Controller
 
         return response(null, 204);
     }
+
+    public function pinOnDashboard(Project $project)
+    {
+        $project->task_progress->update([
+            'pinned_on_dashboard' => TaskProgress::PINNED_ON_DASHBOARD,
+        ]);
+
+        return response()->json($project, 200);
+    }
+
+    public function unpinFromDashboard(Project $project)
+    {
+        $project->task_progress->update([
+            'pinned_on_dashboard' => TaskProgress::NOT_PINNED_ON_DASHBOARD,
+        ]);
+
+        return response()->json($project, 200);
+    }
 }

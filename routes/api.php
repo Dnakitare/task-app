@@ -12,5 +12,7 @@ Route::post('/projects', 'App\Http\Controllers\ProjectController@store');
 Route::get('/projects', 'App\Http\Controllers\ProjectController@index');
 Route::get('/projects/{project}', 'App\Http\Controllers\ProjectController@show');
 Route::put('/projects/{project}', 'App\Http\Controllers\ProjectController@update');
-// Route::delete('/projects/{project}', 'App\Http\Controllers\ProjectController@destroy');
+Route::delete('/projects/{project}', 'App\Http\Controllers\ProjectController@destroy');
+Route::post('/projects/{project}/pin-on-dashboard', 'App\Http\Controllers\ProjectController@pinOnDashboard');
+Route::post('/projects/{project}/unpin-from-dashboard', 'App\Http\Controllers\ProjectController@unpinFromDashboard');
 // });
