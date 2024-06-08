@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Task;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('status')->enum(['todo', 'in_progress', 'done'])->default('todo');
+            $table->string('status')->enum([Task::STATUS_PENDING, Task::STATUS_COMPLETED])->default(Task::STATUS_PENDING);
             $table->timestamps();
         });
     }
