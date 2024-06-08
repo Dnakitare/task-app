@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class UpdateMemberRequest extends FormRequest
+class UpdateMemberRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +20,6 @@ class UpdateMemberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|numeric|exists:members,id',
             'name' => 'required|string',
             'email' => 'required|email|unique:members',
         ];

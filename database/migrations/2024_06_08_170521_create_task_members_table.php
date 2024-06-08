@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('task_id');
             $table->foreignId('project_id');
-            $table->foreignId('member_id');
+            $table->foreignId('member_ids');
             $table->timestamps();
         });
     }
