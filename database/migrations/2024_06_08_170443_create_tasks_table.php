@@ -16,7 +16,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('status')->enum([Task::STATUS_PENDING, Task::STATUS_COMPLETED])->default(Task::STATUS_PENDING);
+            $table->string('status')
+                ->enum([Task::STATUS_NO_STARTED, Task::STATUS_PENDING, Task::STATUS_COMPLETED])
+                ->default(Task::STATUS_NO_STARTED);
             $table->timestamps();
         });
     }
