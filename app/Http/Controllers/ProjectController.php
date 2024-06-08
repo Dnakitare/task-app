@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\TaskProgress;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
@@ -26,6 +27,13 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         return $project->load('task_progress');
+    }
+
+    public function getProjectDetails(Request $request, $slug)
+    {
+        $project = Project::where('slug', $slug)->first();
+
+        return $project->load(['tasks.task_members', 'task_progress']);
     }
 
     public function store(StoreProjectRequest $request)

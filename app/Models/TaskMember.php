@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class TaskMember extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public function members()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

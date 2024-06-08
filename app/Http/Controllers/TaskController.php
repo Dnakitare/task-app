@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
-use App\Models\TaskMember;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
@@ -34,7 +32,7 @@ class TaskController extends Controller
             $task = Task::create($request->all());
 
             $pivotData = array_fill_keys($request->member_ids, ['project_id' => $request->project_id]);
-            $task->members()->attach($pivotData);
+            $task->task_members()->attach($pivotData);
 
             return response($task, 201);
         });
@@ -45,7 +43,7 @@ class TaskController extends Controller
         DB::transaction(function () use ($request, $task) {
             $task->update($request->all());
 
-            $task->members()->sync($request->member_ids);
+            $task->task_members()->sync($request->member_ids);
 
             return response()->json($task, 200);
         });

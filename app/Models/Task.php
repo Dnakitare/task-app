@@ -23,7 +23,7 @@ class Task extends Model
 
     protected $guarded = [];
 
-    public function members()
+    public function task_members()
     {
         return $this->belongsToMany(Member::class, 'task_members')->withPivot('project_id');
     }
