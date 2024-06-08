@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\TaskProgress;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
@@ -17,7 +17,7 @@ class ProjectController extends Controller
             ->when(request('name'), function ($query, $name) {
                 return $query->where('name', 'like', "%$name%");
             })
-            ->latest()
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
         return $projects;
@@ -28,7 +28,7 @@ class ProjectController extends Controller
         return $project->load('task_progress');
     }
 
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
         DB::beginTransaction(function () use ($request) {
             $project = Project::create([
