@@ -87,4 +87,11 @@ class ProjectController extends Controller
 
         return response()->json($project, 200);
     }
+
+    public function countProjects()
+    {
+        $count = Project::count();
+
+        return response(['count' => $count], 200);
+    }
 }
