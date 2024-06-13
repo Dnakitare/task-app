@@ -45,7 +45,7 @@ class TaskController extends Controller
 
             $task->task_members()->sync($request->member_ids);
 
-            return response()->json($task, 200);
+            return response($task, 200);
         });
     }
 
@@ -54,5 +54,71 @@ class TaskController extends Controller
         $task->delete();
 
         return response(null, 204);
+    }
+
+    public function taskNotStartedToPending(Task $task)
+    {
+        if ($task->status !== Task::STATUS_NO_STARTED) {
+            return response(['message' => 'Task status must be not started'], 400);
+        }
+
+        $task->update(['status' => Task::STATUS_PENDING]);
+
+        return response($task, 200);
+    }
+
+    public function taskNotStartedToCompleted(Task $task)
+    {
+        if ($task->status !== Task::STATUS_NO_STARTED) {
+            return response(['message' => 'Task status must be not started'], 400);
+        }
+
+        $task->update(['status' => Task::STATUS_COMPLETED]);
+
+        return response($task, 200);
+    }
+
+    public function taskPendingToCompleted(Task $task)
+    {
+        if ($task->status !== Task::STATUS_PENDING) {
+            return response(['message' => 'Task status must be pending'], 400);
+        }
+
+        $task->update(['status' => Task::STATUS_COMPLETED]);
+
+        return response($task, 200);
+    }
+
+    public function taskPendingToNotStarted(Task $task)
+    {
+        if ($task->status !== Task::STATUS_PENDING) {
+            return response(['message' => 'Task status must be pending'], 400);
+        }
+
+        $task->update(['status' => Task::STATUS_NO_STARTED]);
+
+        return response($task, 200);
+    }
+
+    public function taskCompletedToPending(Task $task)
+    {
+        if ($task->status !== Task::STATUS_COMPLETED) {
+            return response(['message' => 'Task status must be completed'], 400);
+        }
+
+        $task->update(['status' => Task::STATUS_PENDING]);
+
+        return response($task, 200);
+    }
+
+    public function taskCompeletedToNotStarted(Task $task)
+    {
+        if ($task->status !== Task::STATUS_COMPLETED) {
+            return response(['message' => 'Task status must be completed'], 400);
+        }
+
+        $task->update(['status' => Task::STATUS_NO_STARTED]);
+
+        return response($task, 200);
     }
 }

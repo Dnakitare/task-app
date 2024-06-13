@@ -42,5 +42,11 @@ Route::controller(TaskController::class)->group(function () {
     Route::get('/tasks', 'index');
     Route::get('/tasks/{task}', 'show');
     Route::put('/tasks/{task}', 'update');
+    Route::get('/tasks/{task}/not_started_to_pending', 'taskNotStartedToPending');
+    Route::get('/tasks/{task}/not_started_to_completed', 'taskNotStartedToCompleted');
+    Route::get('/tasks/{task}/pending_to_completed', 'taskPendingToCompleted');
+    Route::get('/tasks/{task}/pending_to_not_started', 'taskPendingToNotStarted');
+    Route::get('/tasks/{task}/completed_to_pending', 'taskCompletedToPending');
+    Route::get('/tasks/{task}/completed_to_not_started', 'taskCompletedToNotStarted');
     Route::delete('/tasks/{member}', 'destroy');
 });
