@@ -27,4 +27,9 @@ class Task extends Model
     {
         return $this->belongsToMany(Member::class, 'task_members')->withPivot('project_id');
     }
+
+    public function changeTaskStatus($status)
+    {
+        $this->update(['status' => $status]);
+    }
 }

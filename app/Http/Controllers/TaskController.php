@@ -62,7 +62,7 @@ class TaskController extends Controller
             return response(['message' => 'Task status must be not started'], 400);
         }
 
-        $task->update(['status' => Task::STATUS_PENDING]);
+        $task->changeTaskStatus(Task::STATUS_PENDING);
 
         return response($task, 200);
     }
@@ -73,7 +73,7 @@ class TaskController extends Controller
             return response(['message' => 'Task status must be not started'], 400);
         }
 
-        $task->update(['status' => Task::STATUS_COMPLETED]);
+        $task->changeTaskStatus(Task::STATUS_COMPLETED);
 
         return response($task, 200);
     }
@@ -84,7 +84,7 @@ class TaskController extends Controller
             return response(['message' => 'Task status must be pending'], 400);
         }
 
-        $task->update(['status' => Task::STATUS_COMPLETED]);
+        $task->changeTaskStatus(Task::STATUS_COMPLETED);
 
         return response($task, 200);
     }
@@ -95,7 +95,7 @@ class TaskController extends Controller
             return response(['message' => 'Task status must be pending'], 400);
         }
 
-        $task->update(['status' => Task::STATUS_NO_STARTED]);
+        $task->changeTaskStatus(Task::STATUS_NO_STARTED);
 
         return response($task, 200);
     }
@@ -106,7 +106,7 @@ class TaskController extends Controller
             return response(['message' => 'Task status must be completed'], 400);
         }
 
-        $task->update(['status' => Task::STATUS_PENDING]);
+        $task->changeTaskStatus(Task::STATUS_PENDING);
 
         return response($task, 200);
     }
@@ -117,7 +117,7 @@ class TaskController extends Controller
             return response(['message' => 'Task status must be completed'], 400);
         }
 
-        $task->update(['status' => Task::STATUS_NO_STARTED]);
+        $task->changeTaskStatus(Task::STATUS_NO_STARTED);
 
         return response($task, 200);
     }
